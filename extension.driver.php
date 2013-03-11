@@ -33,6 +33,7 @@
 			$context['fields']['country'] = strtolower(geoip_country_name_by_addr($gi, $context['params']['client-ip']));
 			geoip_close($gi);			
 			//to replace with Symphony Cookie
+			$referer = new Cookie('referer', $validFor , __SYM_COOKIE_PATH__, NULL, false);
 			$context['fields']['referer'] = $referer->get('referer');
 
 			//check if a url is being passed
