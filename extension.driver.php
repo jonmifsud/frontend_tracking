@@ -91,7 +91,7 @@
 				// We have a code via URL param: ...?ref=12345
 				$referer->set('referer',"Ref Code: {$ref_url_param_value} | Referer: {$_SERVER['HTTP_REFERER']} | First URL: {$context['params']['current-url']}");
 			} elseif (empty($old_referer) && $_SERVER['HTTP_REFERER']) {
-				echo('test');
+				// echo('test');
 				//in here we should somewhat separate organic searches
 				// Set to HTTP_REFERER, assuming that in session is empty
 				$referer->set('referer',"Referer: {$_SERVER['HTTP_REFERER']} | First URL: {$context['params']['current-url']}");
