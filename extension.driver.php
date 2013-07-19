@@ -54,6 +54,7 @@
 		 * Add custom params to pool
 		 */
 		public function addParams($context){
+			$hostname = exec('hostname');
 			include_once dirname(__FILE__) . '/lib/geoip/geoip.inc';
 			$gi = geoip_open(dirname(__FILE__) . '/lib/geoip/data/GeoIP.dat',GEOIP_STANDARD);
 				
@@ -75,6 +76,7 @@
 			$context['params']['country-name'] = $country[$context['params']['country-code']];
 			$context['params']['country-phone-code'] = $phoneCodes[$context['params']['country-code']];
 			$this->setReferer($context);
+			Symphony::Profiler()->sample( 'Frontend Params Complete on: ' . $hostname, PROFILE_LAP);
 		}
 
 		private function setReferer($context){
