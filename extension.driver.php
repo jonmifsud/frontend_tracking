@@ -54,6 +54,7 @@
 		 * Add custom params to pool
 		 */
 		public function addParams($context){
+			$hostname = exec('hostname');
 			include_once dirname(__FILE__) . '/lib/geoip/geoip.inc';
 			$gi = geoip_open(dirname(__FILE__) . '/lib/geoip/data/GeoIP.dat',GEOIP_STANDARD);
 				
@@ -75,6 +76,7 @@
 			$context['params']['country-name'] = $country[$context['params']['country-code']];
 			$context['params']['country-phone-code'] = $phoneCodes[$context['params']['country-code']];
 			$this->setReferer($context);
+			Symphony::Profiler()->sample( 'Frontend Params Complete on: ' . $hostname, PROFILE_LAP);
 		}
 
 		private function setReferer($context){
@@ -92,7 +94,7 @@
 				// We have a code via URL param: ...?ref=12345
 				$referer->set('referer',"Ref Code: {$ref_url_param_value} | Referer: {$_SERVER['HTTP_REFERER']} | First URL: {$context['params']['current-url']}");
 			} elseif (empty($old_referer) && $_SERVER['HTTP_REFERER']) {
-				echo('test');
+				// echo('test');
 				//in here we should somewhat separate organic searches
 				// Set to HTTP_REFERER, assuming that in session is empty
 				$referer->set('referer',"Referer: {$_SERVER['HTTP_REFERER']} | First URL: {$context['params']['current-url']}");
