@@ -57,6 +57,9 @@
 			$hostname = exec('hostname');
 			include_once dirname(__FILE__) . '/lib/geoip/geoip.inc';
 			$gi = geoip_open(dirname(__FILE__) . '/lib/geoip/data/GeoIP.dat',GEOIP_STANDARD);
+
+			// Server Status
+			$context['params']['server-status'] = Symphony::Configuration()->get('status', 'server');
 				
 			// Client's IP
 			$context['params']['client-ip'] = $_SERVER['REMOTE_ADDR'];
