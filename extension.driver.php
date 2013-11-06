@@ -30,7 +30,7 @@
 			// Visitor's IP
 			$context['fields']['ip'] = $_SERVER['REMOTE_ADDR'];
 			// Visitor's Country
-			$context['fields']['country'] = strtolower(geoip_country_name_by_addr($gi, $context['params']['client-ip']));
+			$context['fields']['country'] = strtolower(geoip_country_name_by_addr($gi, $_SERVER['REMOTE_ADDR']));
 			geoip_close($gi);			
 			//to replace with Symphony Cookie
 			$referer = new Cookie('referer', $validFor , __SYM_COOKIE_PATH__, NULL, false);
